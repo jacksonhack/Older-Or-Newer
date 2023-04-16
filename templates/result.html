@@ -1,0 +1,25 @@
+<!doctype html>
+
+<title>Supervised Learning Results</title>
+
+<h1>Top Distinguishers of Old Features: </h1>
+
+<ol>
+    {% for word in top_old_words %}
+        <li>{{ word }}</li>
+    {% endfor %}
+</ol>
+
+<h1>Top Distinguishers of New Features: </h1>
+
+<ol>
+    {% for word in top_new_words %}
+        <li>{{ word }}</li>
+    {% endfor %}
+</ol>
+
+<h1>Model Accuracy: {{accuracy}}</h1>
+
+<h1>Model Precision: {{precision}}</h1>
+
+<h1>Model Recall: {{recall}}</h1>

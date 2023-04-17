@@ -2,7 +2,7 @@
 
 This is a web app using Flask and Python that allows users to apply a Logistic Regression model to datasets of web app features to see what words are most predictive of whether a feature is older or newer.
 
-## How to use (Note: this requires Python 3, likely 3.8 or higher)
+## How to use (Note: this requires Python 3, possibly 3.8 or higher)
 
 1. Clone this repo
 2. Start a virtual environment

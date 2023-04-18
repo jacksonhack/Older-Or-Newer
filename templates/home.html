@@ -37,14 +37,103 @@
 		a:hover {
 			background-color: #3e8e41;
 		}
+    /* Style for the drop-down */
+    #select-value {
+      background-color: #4CAF50;
+			border: none;
+			border-radius: 5px;
+			color: white;
+			cursor: pointer;
+			display: inline-block;
+			font-size: 20px;
+			margin-top: 30px;
+			padding: 3px 10px;
+			text-decoration: none;
+			transition: background-color 0.3s ease;
+      margin-bottom: 20px; /* Add margin below the drop-down */
+    }
+    #select-value option {
+      background-color: #f2f2f2;
+      color: black;
+    }
+    /* Style for the drop-down */
+    #select-month {
+      background-color: #4CAF50;
+			border: none;
+			border-radius: 5px;
+			color: white;
+			cursor: pointer;
+			display: inline-block;
+			font-size: 20px;
+			margin-top: 30px;
+			padding: 3px 15px;
+			text-decoration: none;
+			transition: background-color 0.3s ease;
+      margin-bottom: 20px; /* Add margin below the drop-down */
+    }
+    #select-month option {
+      background-color: #f2f2f2;
+      color: black;
+    }
 	</style>
 </head>
 <body>
 	<h1>Welcome to Old and New!</h1>
+	<p>Use this application to determine the distinguishers between old and new requirements of a dataset.</p>
+  <label for="select-value" style="color: #666;" >Select the number of distinguishers to display:</label>
+  <select id="select-value" name="select-value" onchange="updateValue()">
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+  </select>
+  <br>
+  <label for="select-month" style="color: #666;" >Select the month cutoff for old/new requirements:</label>
+  <select id="select-month" name="select-month" onchange="updateValue()">
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+  </select>
 	<p>Upload a feature set or use ours to see how a Logistic Regression model categorizes old and new features of web apps!</p>
 	<!-- could probably use a more in-depth description of what all of our stuff does -->
 	<a href="/upload">Upload a feature set</a>
 	<a href="/results/zoom">Use our Zoom data</a>
 	<a href="/results/webex">Use our Webex data</a>
 </body>
+<script>
+	const urlParams = new URLSearchParams(window.location.search);
+    const numDistinguishers = urlParams.get('numDistinguishers');
+    const month = urlParams.get('month');
+
+    // Set the value of the dropdown to the URL parameter value, if it exists
+    if (numDistinguishers) {
+      document.getElementById('select-value').value = numDistinguishers;
+    }
+    // Set the value of the dropdown to the URL parameter value, if it exists
+    if (month) {
+      document.getElementById('select-month').value = month;
+    }
+  function updateValue() {
+    const selectValue = document.getElementById('select-value').value;
+    const selectMonth = document.getElementById('select-month').value;
+    window.location.href = '?numDistinguishers=' + selectValue + '&month=' + selectMonth;
+  }
+</script>
 </html>

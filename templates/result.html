@@ -1,25 +1,104 @@
 <!doctype html>
+<html>
+<head>
+    <title>Supervised Learning Results</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            width: max-content;
+            margin: 0 auto;
+            margin-top: 10px;
 
-<title>Supervised Learning Results</title>
-
-<h1>Top Distinguishers of Old Features: </h1>
-
-<ol>
-    {% for word in top_old_words %}
-        <li>{{ word }}</li>
-    {% endfor %}
-</ol>
-
-<h1>Top Distinguishers of New Features: </h1>
-
-<ol>
-    {% for word in top_new_words %}
-        <li>{{ word }}</li>
-    {% endfor %}
-</ol>
-
-<h1>Model Accuracy: {{accuracy}}</h1>
-
-<h1>Model Precision: {{precision}}</h1>
-
-<h1>Model Recall: {{recall}}</h1>
+        }
+        .distinguishers {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        ol {
+            background-color: #fff;
+            border: 2px solid #333;
+            border-radius: 5px;
+            list-style: none;
+            margin: 0px;
+            padding: 10px;
+            text-align: left;
+            width: 45%;
+        }
+        li {
+            font-size: 24px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        h1:nth-of-type(2n+1) {
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 40px;
+            color: white;
+            margin-top: 50px;
+            padding: 15px 25px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            width: max-content;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+        h1:nth-of-type(2n+2) {
+            background-color: #333;
+            border: none;
+            border-radius: 40px;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            width: max-content;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+        a {
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 20px;
+            padding: 15px 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" style="position: absolute;left: 10px; top: 10px;">Back</a>
+    <h1 style="width: max-content">Supervised Learning Results</h1>
+    <div class="distinguishers">
+        <ol>
+            <h1>Top Distinguishers of Old Features:</h1>
+            {% for word in top_old_words %}
+                <li>{{ word }}</li>
+            {% endfor %}
+        </ol>
+        <ol>
+            <h1>Top Distinguishers of New Features:</h1>
+            {% for word in top_new_words %}
+                <li>{{ word }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    <h1>Model Accuracy: {{accuracy}}</h1>
+    <h1>Model Precision: {{precision}}</h1>
+    <h1 style="margin-bottom: 10px;">Model Recall: {{recall}}</h1>
+</body>
+</html>

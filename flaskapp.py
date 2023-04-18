@@ -13,12 +13,14 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.model_selection import train_test_split
+from flask import request
 
 app = Flask(__name__)
 
 all_feature_descr = pd.read_excel('Zoom-features-2022.xlsx', sheet_name = None, usecols = [2]) # read second column from all sheets, returns dictionary {sheet_name:dataframe}
 months = ['Jan-2022','Feb-2022','March-2022','April-2022','May-2022','June-2022','July-2022','Aug-2022','Sept-2022','Oct-2022','Nov-2022','Dec-2022']
-
+num_distinguishers = 5
+this_month = 3
 
 # download nltk utilities
 nltk.download('punkt')
@@ -231,23 +233,30 @@ def supervisedLearning(feature_descr, numOfDistinguishers,divider):
 # home page
 @app.route("/")
 def home():
+  global num_distinguishers
+  global this_month
+  num_distinguishers = int(request.args.get('numDistinguishers', 5))
+  this_month = int(request.args.get('month', 3))
   return render_template('home.html')
 
 # results page, feature_set_id is the id of the feature set to be used (zoom or webex, maybe custom in the future)
 @app.route("/results/<feature_set_id>")
 def results(feature_set_id = "zoom"):
+  global num_distinguishers
+  global this_month
   feature_descr = pd.read_excel('Zoom-features-2022.xlsx', sheet_name = None, usecols = [2]) # read second column from all sheets, returns dictionary {sheet_name:dataframe}
   # run supervised learning code and return the result
   if(feature_set_id == "zoom"):
     # update feature_descr to zoom
     feature_descr = pd.read_excel('Zoom-features-2022.xlsx', sheet_name = None, usecols = [2]) # read second column from all sheets, returns dictionary {sheet_name:dataframe}
-    top_old_words, top_new_words, accuracy, precision, recall = supervisedLearning(feature_descr, 20,3)
+    top_old_words, top_new_words, accuracy, precision, recall = supervisedLearning(feature_descr, num_distinguishers,this_month)
     # maybe we can actually run this multiple times (for month cutoffs) and return the best result and what month cutoff it was
   
   elif(feature_set_id == "webex"):
     # update feature_descr to webex
     feature_descr = pd.read_excel('WebEx-features-2022.xlsx', sheet_name = None, usecols = [2]) # read second column from all sheets, returns dictionary {sheet_name:dataframe}
     # run supervised learning code and return the result
-    top_old_words, top_new_words, accuracy, precision, recall = supervisedLearning(feature_descr, 20,3)
+    top_old_words, top_new_words, accuracy, precision, recall = supervisedLearning(feature_descr, num_distinguishers,this_month)
 
   return render_template('result.html', top_old_words=top_old_words, top_new_words=top_new_words, accuracy=accuracy, precision=precision, recall=recall)
+

@@ -1,20 +1,50 @@
-<!--home page that has 2 clickable buttons, one for zoom data, one for webex-->
-
 <!doctype html>
-
-<title>Welcome to Old and New!</title>
-<h1> Welcome to Old and New!</h1>
-<h1>Upload a feature set or use ours to see how a Logistic Regression model categorizes old and new features of web apps!</h1>
-<!--could probably use a more in-depth description of what all of our stuff does-->
-
-<a href="/upload">Upload a feature set</a>
-
-</br>
-
-<a href="/results/zoom">Use our Zoom data</a>
-
-</br>
-
-<a href="/results/webex">Use our Webex data</a>
-
-</br>
+<html>
+<head>
+	<title>Welcome to Old and New!</title>
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+			font-size: 18px;
+			margin: 0;
+			padding: 0;
+			text-align: center;
+		}
+		h1 {
+			color: #333;
+			font-size: 32px;
+			margin-top: 50px;
+		}
+		p {
+			color: #666;
+			font-size: 24px;
+			margin-top: 20px;
+		}
+		a {
+			background-color: #4CAF50;
+			border: none;
+			border-radius: 5px;
+			color: white;
+			cursor: pointer;
+			display: inline-block;
+			font-size: 20px;
+			margin-top: 30px;
+			padding: 15px 25px;
+			text-decoration: none;
+			transition: background-color 0.3s ease;
+		}
+		a:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<h1>Welcome to Old and New!</h1>
+	<p>Upload a feature set or use ours to see how a Logistic Regression model categorizes old and new features of web apps!</p>
+	<!-- could probably use a more in-depth description of what all of our stuff does -->
+	<a href="/upload">Upload a feature set</a>
+	<a href="/results/zoom">Use our Zoom data</a>
+	<a href="/results/webex">Use our Webex data</a>
+</body>
+</html>

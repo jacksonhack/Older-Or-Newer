@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <title>Supervised Learning Results</title>
+    <style>
+        
+        form {
+            margin-top: 30px;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+            background-color: #FF5722;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 20px;
+            padding: 15px 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        input[type="file"]:hover {
+            background-color: #c33c11;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 20px;
+            padding: 18px 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-top: 50px;
+        }
+        p {
+            color: #666;
+            font-size: 24px;
+            margin-top: 40px;
+        }
+        a {
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 20px;
+            margin-top: 10px;
+            padding: 15px 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #3e8e41;
+        }
+   
+    </style>
+</head>
+<body>
+    <a href="/" style="position: absolute;left: 10px; top: 10px;">Back</a>
+    <h1>Upload an Excel File (.xlsx)</h1>
+    <form action="{{ url_for('view') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file"
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        
+        <input type="submit" value="Upload">
+    </form>
+
+    <p style="color: {{ color }}"> Error with uploaded file. Please see examples below for correct formatting:</p>
+    <p>Download Our Example Files:</p>
+    <a href="/upload/download-zoom">Zoom Requirements</a>
+    <a href="/upload/download-webex">Webex Requirements</a>
+</body>
+</html>

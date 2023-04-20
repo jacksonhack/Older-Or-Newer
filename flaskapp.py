@@ -273,15 +273,18 @@ def view():
     # save file in local directory
     file.save(file.filename)
  
-    feature_descr = pd.read_excel(file, sheet_name = None, usecols = [2]) # read second column from all sheets, returns dictionary {sheet_name:dataframe}
+    
 
     try:
+        feature_descr = pd.read_excel(file, sheet_name = None, usecols = [2]) # read second column from all sheets, returns dictionary {sheet_name:dataframe}
         # run supervised learning code and return the result
         top_old_words, top_new_words, accuracy, precision, recall = supervisedLearning(feature_descr, num_distinguishers,this_month)
          
         return render_template('result.html', top_old_words=top_old_words, top_new_words=top_new_words, accuracy=accuracy, precision=precision, recall=recall)
     except Exception as e:
         return render_template('upload.html', color="red")
+    
+    
 @app.route('/upload/download-zoom')
 def download_zoom():
     filename = 'Zoom-features-2022.xlsx'

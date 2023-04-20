@@ -13,7 +13,7 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.model_selection import train_test_split
-from flask import request
+from flask import request, send_file
 
 app = Flask(__name__)
 
@@ -260,3 +260,34 @@ def results(feature_set_id = "zoom"):
 
   return render_template('result.html', top_old_words=top_old_words, top_new_words=top_new_words, accuracy=accuracy, precision=precision, recall=recall)
 
+# upload
+@app.route('/upload')
+def upload():
+ return render_template('upload.html', color="#f2f2f2;")
+
+@app.post('/view')
+def view():
+ 
+    # Read the File using Flask request
+    file = request.files['file']
+    # save file in local directory
+    file.save(file.filename)
+ 
+    feature_descr = pd.read_excel(file, sheet_name = None, usecols = [2]) # read second column from all sheets, returns dictionary {sheet_name:dataframe}
+
+    try:
+        # run supervised learning code and return the result
+        top_old_words, top_new_words, accuracy, precision, recall = supervisedLearning(feature_descr, num_distinguishers,this_month)
+         
+        return render_template('result.html', top_old_words=top_old_words, top_new_words=top_new_words, accuracy=accuracy, precision=precision, recall=recall)
+    except Exception as e:
+        return render_template('upload.html', color="red")
+@app.route('/upload/download-zoom')
+def download_zoom():
+    filename = 'Zoom-features-2022.xlsx'
+    return send_file(filename, as_attachment=True)
+
+@app.route('/upload/download-webex')
+def download_webex():
+    filename = 'WebEx-features-2022.xlsx'
+    return send_file(filename, as_attachment=True)
